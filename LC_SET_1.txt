@@ -1,0 +1,498 @@
+1. TWO SUM:
+
+    class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1;j<nums.length;j++){
+                if(nums[i]+nums[j]==target){
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return new int[]{};
+    }
+}
+
+
+1672. Richest Customer Wealth
+
+    class Solution {
+    public int maximumWealth(int[][] accounts) {
+        int max=0;
+        for(int i=0;i<accounts.length;i++){
+            int sum=0;
+            for(int j=0;j<accounts[i].length;j++){
+                sum+=accounts[i][j];
+            }   
+            if(sum>max){
+                max=sum;
+            }
+        }
+        return max;
+    }
+}
+
+1480. Running Sum of 1d Array
+
+    class Solution {
+    public int[] runningSum(int[] nums) {
+        int[] a=new int[nums.length];
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            a[i]=sum;
+        }
+        return a;
+    }
+}
+
+1295. Find Numbers with Even Number of Digits
+
+    class Solution {
+    public int findNumbers(int[] nums) {
+        int c=0;
+        for(int i=0;i<nums.length;i++){
+            int dc=0;
+            int temp=nums[i];
+            while(temp>0){
+                dc++;
+                temp/=10;
+            }
+            if(dc%2==0){
+                c++;
+            }
+        }
+        return c;
+    }
+}
+
+2529. Maximum Count of Positive Integer and Negative Integer
+
+    class Solution {
+    public int maximumCount(int[] nums) {
+        int pc=0;
+        int nc=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<0){
+                nc++;
+            }else if(nums[i]>0){
+                pc++;
+            }
+        }
+        return Math.max(nc,pc);
+    }
+}
+
+2798. Number of Employees Who Met the Target
+
+    class Solution {
+    public int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
+        int c=0;
+        for(int i=0;i<hours.length;i++){
+            if(hours[i]>=target){
+                c++;
+            }
+        }
+        return c;
+    }
+}
+
+121. Best Time to Buy and Sell Stock
+
+    class Solution {
+    public int maxProfit(int[] prices) {
+        int max=0;
+        int b=prices[0];
+        for(int i=1;i<prices.length;i++){
+            if(prices[i]<b){
+                b=prices[i];
+            }else if(prices[i]-b>max){
+                max=prices[i]-b;
+            }
+        }
+        return max;
+    }
+}
+
+344. Reverse String
+
+class Solution {
+    public void reverseString(char[] s) {
+        int i=0;
+        int j=s.length-1;
+        while(i<=j){
+            char temp=s[i];
+            s[i]=s[j];
+            s[j]=temp;
+            i++;
+            j--;
+        }
+    }
+}
+
+88. Merge Sorted Array
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+     int i=m-1;
+     int j=n-1;
+     int k=m+n-1;
+     while(i>=0 && j>=0){
+        if(nums1[i]>nums2[j]){
+            nums1[k--]=nums1[i];
+            i--;
+        }else {
+            nums1[k--]=nums2[j];
+            j--;
+        }
+     }
+     while(j>=0){
+        nums1[k--]=nums2[j];
+        j--;
+     }
+    }
+}
+
+
+917. Reverse Only Letters
+
+class Solution {
+    public String reverseOnlyLetters(String s) {
+        char[] c=s.toCharArray();
+        int i=0;
+        int j=s.length()-1;
+        while(i<j){
+            if(Character.isLetter(c[i]) && Character.isLetter(c[j])){
+                char ch=c[i];
+                c[i]=c[j];
+                c[j]=ch;
+                i++;
+                j--;
+            }else if(Character.isLetter(c[i])){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return new String(c);
+    }
+}
+
+
+345. Reverse Vowels of a String
+
+class Solution {
+    public String reverseVowels(String s) {
+        char[] c=s.toCharArray();
+        int i=0;
+        int j=c.length-1;
+        while(i<=j){
+            if((c[i]=='a'||c[i]=='e'||c[i]=='i'||c[i]=='o'||c[i]=='u'||c[i]=='A'||c[i]=='E'||c[i]=='I'||c[i]=='O'||c[i]=='U')&&
+             ((c[j]=='a'||c[j]=='e'||c[j]=='i'||c[j]=='o'||c[j]=='u'||c[j]=='A'||c[j]=='E'||c[j]=='I'||c[j]=='O'||c[j]=='U'))){
+                char t=c[i];
+                c[i]=c[j];
+                c[j]=t;
+                i++;
+                j--;
+             }else if((c[i]=='a'||c[i]=='e'||c[i]=='i'||c[i]=='o'||c[i]=='u'||c[i]=='A'||c[i]=='E'||c[i]=='I'||c[i]=='O'||c[i]=='U')){
+                j--;
+             }else{
+                i++;
+             }
+        }
+        String ans = new String(c);
+        return ans;
+    }
+}
+
+167. Two Sum II - Input Array Is Sorted
+
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int[] a=new int[2];
+        int i=0;
+        int j=numbers.length-1;  
+        while(i<j){
+            int s=numbers[i]+numbers[j];
+            if(s==target){
+                a[0]=i+1;
+                a[1]=j+1;
+                break;
+            }else if(s>target){
+                j--;
+            }else{
+                i++;
+            }
+       } 
+       return a;
+    }
+}
+
+
+1768. Merge Strings Alternately
+
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        StringBuilder s=new StringBuilder();
+        int i=0;
+        int j=0;
+        while(i<word1.length() && j<word2.length()){
+            s.append(word1.charAt(i));
+            s.append(word2.charAt(j));
+            i++;
+            j++;
+        }
+        while(i<word1.length()){
+            s.append(word1.charAt(i));
+            i++;
+        }
+        while(j<word2.length()){
+            s.append(word2.charAt(j));
+            j++;
+        }
+        return s.toString();
+    }
+}
+
+
+349. Intersection of Two Arrays
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set=new HashSet<>();
+        Set<Integer> res=new HashSet<>();
+        for(int n:nums1){
+            set.add(n);
+        }
+        for(int n:nums2){
+            if(set.contains(n)){
+                res.add(n);
+            }
+        }
+        int[] a=new int[res.size()];
+        int i=0;
+        for(int n:res){
+            a[i++]=n;
+        }
+        return a;
+    }
+}
+
+
+392. Is Subsequence
+
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int i=0;
+        int j=0;
+        while(i<s.length() && j<t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+            }
+            j++;
+        }
+        return i==s.length();
+    }
+}
+
+
+26. Remove Duplicates from Sorted Array
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k=0;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]!=nums[i-1]){
+                k++;
+                nums[k]=nums[i];
+            }
+        }
+        return k+1;
+    }
+}
+
+
+189. Rotate Array
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int[] t=new int[nums.length];
+        k=k%nums.length;
+        for(int i=0;i<nums.length;i++){
+            t[(i+k)%nums.length]=nums[i];
+        }
+        for(int i=0;i<t.length;i++){
+            nums[i]=t[i];
+        }
+    }
+}
+
+
+
+821. Shortest Distance to a Character
+
+class Solution {
+    public int[] shortestToChar(String s, char c) {
+        int n=s.length();
+        int[] a=new int[n];
+        int pre=-n;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)==c){
+                pre=i;
+            }
+            a[i]=i-pre;
+        }
+        pre=n*2;
+        for(int i=n-1;i>=0;i--){
+            if(s.charAt(i)==c){
+                pre=i;
+            }
+            a[i]=Math.min(a[i],pre-i);
+        }
+        return a;
+    }
+}
+
+
+977. Squares of a Sorted Array
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int[] a=new int[nums.length];
+        for(int i=0;i<nums.length;i++){
+            a[i]=nums[i]*nums[i];
+        }
+        Arrays.sort(a);
+        return a;
+    }
+}
+
+
+2108. Find First Palindromic String in the Array
+
+class Solution {
+    public String firstPalindrome(String[] words) {
+        for(int i=0;i<words.length;i++){
+            StringBuilder s=new StringBuilder(words[i]);
+            String ch=words[i];
+            if((s.reverse().toString()).equals(ch)){
+                return words[i];
+            }
+        }
+        return "";
+    }
+}
+
+
+27. Remove Element
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int k=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=val){
+                nums[k++]=nums[i];
+            }
+        }
+        return k;
+    }
+}
+
+
+11. Container With Most Water
+
+class Solution {
+    public int maxArea(int[] height) {
+        int i=0;
+        int j=height.length-1;
+        int max=0;
+        while(i<j){
+            int w=j-i;
+            int h=Math.min(height[i],height[j]);
+            int ans=w*h;
+            max=Math.max(ans,max);
+            if(height[i]<height[j]){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return max;
+    }
+}
+
+
+75. Sort Colors
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int l=0;
+        int r=nums.length-1;
+        int m=0;
+        while(m<=r){
+            if(nums[m]==0){
+                int temp=nums[l];
+                nums[l]=nums[m];
+                nums[m]=temp;
+                l++;
+                m++;
+            }else if(nums[m]==1){
+                m++;
+            }else{
+                int temp=nums[m];
+                nums[m]=nums[r];
+                nums[r]=temp;
+                r--;
+            }
+        }
+    }
+}
+
+
+151. Reverse Words in a String
+
+class Solution {
+    public String reverseWords(String s) {
+        String[] ch = s.trim().split("\\s+");
+        int i=0;
+        int j=ch.length-1;
+        while(i<=j){
+            String c=ch[i];
+            ch[i]=ch[j];
+            ch[j]=c;
+            i++;
+            j--;
+        }
+        String ans="";
+        for(int k=0;k<ch.length;k++){
+            if(k!=ch.length-1)
+               ans=ans+ch[k]+" ";
+            else
+                ans=ans+ch[k];
+        }
+        return ans;
+    }
+}
+
+455. Assign Cookies
+
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int i=0;
+        int j=0;
+        int c=0;
+        while(i<g.length && j<s.length){
+            if(s[j]>=g[i]){
+                c+=1;
+                i++;
+                j++;
+            }else{
+                j++;
+            }
+        }
+        return c;
+    }
+}
+

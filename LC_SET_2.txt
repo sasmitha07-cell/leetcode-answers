@@ -1,0 +1,283 @@
+169. Majority Element
+
+class Solution {
+    public int majorityElement(int[] nums) {
+       int a=0;
+       for(int i=0;i<nums.length;i++){
+        int c=0;
+        for(int j=i+1;j<nums.length;j++){
+            if(nums[i]==nums[j]){
+                c++;
+            }
+        }
+        if(c>=(nums.length/2)){
+            a=nums[i];
+        }
+       }
+       return a;
+    }
+}
+
+
+242. Valid Anagram
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        char[] s1=s.toCharArray();
+        char[] t1=t.toCharArray();
+        Arrays.sort(s1);
+        Arrays.sort(t1);
+        return Arrays.equals(s1,t1);
+    }
+}
+
+
+389. Find the Difference
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+        int[] f=new int[26];
+        for(char c: s.toCharArray()){
+            f[c-'a']++;
+        }
+        for(char c:t.toCharArray()){
+            f[c-'a']--;
+            if(f[c-'a']<0){
+                return c;
+            }
+        }
+        return '\0';
+    }
+}
+
+
+349. Intersection of Two Arrays
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set=new HashSet<>();
+        Set<Integer> res=new HashSet<>();
+        for(int n:nums1){
+            set.add(n);
+        }
+        for(int n:nums2){
+            if(set.contains(n)){
+                res.add(n);
+            }
+        }
+        int[] a=new int[res.size()];
+        int i=0;
+        for(int n:res){
+            a[i++]=n;
+        }
+        return a;
+    }
+}
+
+
+167. Two Sum II - Input Array Is Sorted
+
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int[] a=new int[2];
+        int i=0;
+        int j=numbers.length-1;  
+        while(i<j){
+            int s=numbers[i]+numbers[j];
+            if(s==target){
+                a[0]=i+1;
+                a[1]=j+1;
+                break;
+            }else if(s>target){
+                j--;
+            }else{
+                i++;
+            }
+       } 
+       return a;
+    }
+}
+
+
+392. Is Subsequence
+
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int i=0;
+        int j=0;
+        while(i<s.length() && j<t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+            }
+            j++;
+        }
+        return i==s.length();
+    }
+}
+
+
+917. Reverse Only Letters
+
+class Solution {
+    public String reverseOnlyLetters(String s) {
+        char[] c=s.toCharArray();
+        int i=0;
+        int j=s.length()-1;
+        while(i<j){
+            if(Character.isLetter(c[i]) && Character.isLetter(c[j])){
+                char ch=c[i];
+                c[i]=c[j];
+                c[j]=ch;
+                i++;
+                j--;
+            }else if(Character.isLetter(c[i])){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return new String(c);
+    }
+}
+
+
+26. Remove Duplicates from Sorted Array
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k=0;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]!=nums[i-1]){
+                k++;
+                nums[k]=nums[i];
+            }
+        }
+        return k+1;
+    }
+}
+
+
+977. Squares of a Sorted Array
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int[] a=new int[nums.length];
+        for(int i=0;i<nums.length;i++){
+            a[i]=nums[i]*nums[i];
+        }
+        Arrays.sort(a);
+        return a;
+    }
+}
+
+2108. Find First Palindromic String in the Array
+
+class Solution {
+    public String firstPalindrome(String[] words) {
+        for(int i=0;i<words.length;i++){
+            StringBuilder s=new StringBuilder(words[i]);
+            String ch=words[i];
+            if((s.reverse().toString()).equals(ch)){
+                return words[i];
+            }
+        }
+        return "";
+    }
+}
+
+
+125. Valid Palindrome
+
+class Solution {
+    public boolean isPalindrome(String s) {
+      String rev="";
+      s=s.toLowerCase();
+      for(int i=0;i<s.length();i++){
+        char c=s.charAt(i);
+        if(Character.isLetterOrDigit(c)){
+            rev=rev+c;
+        }
+      }
+      String ans="";
+      for(int i=rev.length()-1;i>=0;i--){
+        ans=ans+rev.charAt(i);
+      }
+      return rev.equals(ans);
+    }
+}
+
+
+268. Missing Number
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n=nums.length;
+        int val=0;
+        int exp=(n*(n+1))/2;
+        for(int i=0;i<n;i++){
+            val+=nums[i];
+        }
+        return exp-val;
+    }
+}
+
+
+414. Third Maximum Number
+
+class Solution {
+    public int thirdMax(int[] nums) {
+        TreeSet<Integer> tset=new TreeSet<>(Collections.reverseOrder());
+        for(int i=0;i<nums.length;i++){
+            tset.add(nums[i]);
+        }
+        ArrayList<Integer> list=new ArrayList<>(tset);
+        if(list.size()<3){
+            return Collections.max(list);
+        }else{
+            return list.get(2);
+        }
+    }
+}
+
+
+485. Max Consecutive Ones
+
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int c=0;
+        int max=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==1){
+                c++;
+                max=Math.max(c,max);
+            }else{
+                c=0;
+            }
+        }
+        return max;
+    }
+}
+
+
+704. Binary Search
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int left=0;
+        int right=nums.length-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(nums[mid]==target){
+                return mid;
+            }else if(nums[mid]<target){
+                left=mid+1;
+            }else{
+                right=mid-1;
+            }
+        }
+        return -1;
+    }
+}
