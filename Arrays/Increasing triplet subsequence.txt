@@ -1,0 +1,16 @@
+class Solution {
+    public boolean increasingTriplet(int[] nums) {
+       int fm=Integer.MAX_VALUE;
+       int sm=Integer.MAX_VALUE;
+       for(int n:nums){
+        if(n<=fm){
+            fm=n;
+        }else if(n<=sm){
+            sm=n;
+        }else{
+            return true;
+        }
+       }
+       return false;
+    }
+}
