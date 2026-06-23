@@ -1,0 +1,14 @@
+2108. Find First Palindromic String in the Array
+
+class Solution {
+    public String firstPalindrome(String[] words) {
+        for(int i=0;i<words.length;i++){
+            StringBuilder s=new StringBuilder(words[i]);
+            String ch=words[i];
+            if((s.reverse().toString()).equals(ch)){
+                return words[i];
+            }
+        }
+        return "";
+    }
+}
