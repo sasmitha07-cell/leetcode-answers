@@ -1,0 +1,78 @@
+567. Permutation in String
+
+USING FREQUENCY ARRAY:
+
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if(s2.length()<s1.length()){
+            return false;
+        }
+        int[] fa=new int[26];
+        for(int i=0;i<s1.length();i++){
+            char c=s1.charAt(i);
+            fa[c-'a']++;
+        }
+        int[] a=new int[26];
+        int k=s1.length();
+        for(int i=0;i<k;i++){
+            char c=s2.charAt(i);
+            a[c-'a']++;
+        }
+        if(Arrays.equals(fa,a)){
+            return true;
+        }
+        int i=k;
+        int j=0;
+        while(i<s2.length()){
+            a[s2.charAt(j)-'a']--;
+            a[s2.charAt(i)-'a']++;
+            if(Arrays.equals(fa,a)){
+                return true;
+            }
+            i++;
+            j++;
+        }
+        return false;
+    }
+}
+
+
+
+USING HASHMAP:
+
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if(s2.length()<s1.length()){
+            return false;
+        }
+        Map<Character,Integer> fm=new HashMap<>();
+        for(int i=0;i<s1.length();i++){
+            fm.put(s1.charAt(i),fm.getOrDefault(s1.charAt(i),0)+1);
+        }
+        int k=s1.length();
+        Map<Character,Integer> f=new HashMap<>();
+        for(int i=0;i<k;i++){
+            f.put(s2.charAt(i),f.getOrDefault(s2.charAt(i),0)+1);
+        }
+        if(fm.equals(f)){
+            return true;
+        }
+        int i=k;
+        int j=0;
+        while(i<s2.length()){
+            f.put(s2.charAt(j), f.get(s2.charAt(j))-1);
+            if(f.get(s2.charAt(j))==0){
+                f.remove(s2.charAt(j));
+            }
+            f.put(s2.charAt(i),f.getOrDefault(s2.charAt(i),0)+1);
+            if(fm.equals(f)){
+                return true;
+            }
+            i++;
+            j++;
+        }
+        return false;
+    }
+}
