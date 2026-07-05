@@ -1,0 +1,46 @@
+class Solution {
+    static int dx,dy;
+    static int m,n;
+    static int min=0;
+    static int totc=0;
+    public int uniquePathsIII(int[][] grid) {
+        m=grid.length;
+        n=grid[0].length;
+        int sx=0,sy=0;
+        min=0;
+        totc=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]!=-1)
+                    totc++;
+                if(grid[i][j]==1){
+                    sx=i;
+                    sy=j;
+                }
+                if(grid[i][j]==2){
+                    dx=i;
+                    dy=j;
+                }
+            }
+        }
+        boolean[][] sol=new boolean[m][n];
+        backtrack(sx,sy,sol,grid,1);
+        return min;
+    }
+    public static void backtrack(int x,int y,boolean[][] sol,int[][] grid,int c){
+        if(x<0 || x>=m || y<0 || y>=n || grid[x][y]== -1 || sol[x][y]){
+            return;
+        }
+        if(x==dx && y==dy){
+            if(c==totc)
+                min++;
+            return;
+        }
+        sol[x][y]=true;
+        backtrack(x,y+1,sol,grid,c+1);
+        backtrack(x,y-1,sol,grid,c+1);
+        backtrack(x+1,y,sol,grid,c+1);
+        backtrack(x-1,y,sol,grid,c+1);
+        sol[x][y]=false;
+    }
+}
