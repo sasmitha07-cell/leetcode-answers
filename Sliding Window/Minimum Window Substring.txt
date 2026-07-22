@@ -1,0 +1,39 @@
+76. MINIMUM WINDOW SUNSTRING
+
+class Solution {
+    public String minWindow(String s, String t) {
+        if(s.length()<t.length()){
+            return "";
+        }
+        HashMap<Character,Integer> tmap=new HashMap<>();
+        for(int i=0;i<t.length();i++){
+            tmap.put(t.charAt(i),tmap.getOrDefault(t.charAt(i),0)+1);
+        }
+        int r=t.length();
+        int l=0;
+        int max=Integer.MAX_VALUE;
+        int st=0;
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(tmap.containsKey(ch)){
+                if(tmap.get(ch)>0)
+                    r--;
+                tmap.put(ch,tmap.get(ch)-1);
+            }
+            while(r==0){
+                if(i-l+1<max){
+                    max=i-l+1;
+                    st=l;
+                }
+                char lc=s.charAt(l);
+                if(tmap.containsKey(lc)){
+                    tmap.put(lc,tmap.get(lc)+1);
+                    if(tmap.get(lc)>0)
+                        r++;
+                }
+                l++;
+            }
+        }
+        return (max==Integer.MAX_VALUE?"":s.substring(st,st+max));
+    }
+}
